@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plataforma de Mejora del Hogar</title>
+    <link rel="stylesheet" href="styles/main.css">
+</head>
+<body>
+    <header>
+        <h1>Plataforma de Mejora del Hogar</h1>
+        <nav>
+            <a href="#register">Registro</a>
+            <a href="#professionals">Directorio</a>
+        </nav>
+    </header>
+    <main>
+        <!-- Registro de Usuarios -->
+        <section id="register">
+            <h2>Registro de Usuario</h2>
+            <form id="registerForm">
+                <label for="username">Nombre de usuario:</label>
+                <input type="text" id="username" name="username" required>
+                
+                <label for="email">Correo electrónico:</label>
+                <input type="email" id="email" name="email" required>
+                
+                <label for="password">Contraseña:</label>
+                <input type="password" id="password" name="password" required>
+                
+                <button type="submit">Registrar</button>
+            </form>
+            <p id="registerMessage"></p>
+        </section>
+
+        <!-- Directorio de Profesionales -->
+        <section id="professionals">
+            <h2>Directorio de Profesionales</h2>
+            <label for="filterSpecialty">Filtrar por especialidad:</label>
+            <select id="filterSpecialty">
+                <option value="">Todos</option>
+                <option value="Diseño de Interiores">Diseño de Interiores</option>
+                <option value="Jardinería">Jardinería</option>
+                <option value="Reformas">Reformas</option>
+            </select>
+            <div id="professionalList"></div>
+        </section>
+    </main>
+    <script src="scripts/app.js"></script>
+</body>
+</html>
