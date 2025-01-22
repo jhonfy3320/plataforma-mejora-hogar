@@ -1,6 +1,4 @@
-document.addEventListener("DOMContentLoaded", () => {
-    console.log("Plataforma cargada");
-    // Registro de Usuarios
+// Registro de Usuarios
 document.getElementById("registerForm").addEventListener("submit", (e) => {
     e.preventDefault();
 
@@ -9,47 +7,37 @@ document.getElementById("registerForm").addEventListener("submit", (e) => {
     const password = document.getElementById("password").value;
 
     if (username && email && password) {
-        const user = { username, email, password };
+        const user = { username, email };
         localStorage.setItem(email, JSON.stringify(user));
+
         document.getElementById("registerMessage").textContent = "¡Registro exitoso!";
+        document.getElementById("registerForm").reset();
+
+        // Actualiza la lista de usuarios registrados
+        addUserToList(user);
     } else {
         document.getElementById("registerMessage").textContent =
             "Por favor, complete todos los campos.";
     }
 });
 
-// Directorio de Profesionales
-const professionals = [
-    { name: "Juan Pérez", specialty: "Diseño de Interiores", experience: 5 },
-    { name: "Ana Gómez", specialty: "Jardinería", experience: 3 },
-    { name: "Carlos Díaz", specialty: "Reformas", experience: 10 },
-];
-
-function renderProfessionals(filteredProfessionals = professionals) {
-    const listContainer = document.getElementById("professionalList");
-    listContainer.innerHTML = "";
-
-    filteredProfessionals.forEach((pro) => {
-        const card = document.createElement("div");
-        card.innerHTML = `
-            <h3>${pro.name}</h3>
-            <p>Especialidad: ${pro.specialty}</p>
-            <p>Experiencia: ${pro.experience} años</p>
-        `;
-        listContainer.appendChild(card);
-    });
+// Mostrar Usuarios Registrados
+function addUserToList(user) {
+    const userList = document.getElementById("userList");
+    const listItem = document.createElement("li");
+    listItem.textContent = `${user.username} - ${user.email}`;
+    userList.appendChild(listItem);
 }
 
-document.getElementById("filterSpecialty").addEventListener("change", (e) => {
-    const specialty = e.target.value;
-    const filtered = specialty
-        ? professionals.filter((pro) => pro.specialty === specialty)
-        : professionals;
+// Cargar Usuarios desde el Almacenamiento Local al Iniciar
+window.onload = () => {
+    for (let i = 0; i < localStorage.length; i++) {
+        const key = localStorage.key(i);
+        const user = JSON.parse(localStorage.getItem(key));
+        if (user && user.username) {
+            addUserToList(user);
+        }
+    }
+};
 
-    renderProfessionals(filtered);
-});
-
-renderProfessionals();
-
-  });
   
